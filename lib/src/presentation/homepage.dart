@@ -11,7 +11,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double harga = 1000000;
+  int harga = 1000000;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +23,17 @@ class _MyHomePageState extends State<MyHomePage> {
           itemCount: 5,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text('Barang $index'),
+              title: Text('Barang ${index + 1}'),
               subtitle: Text('Harga Rp${harga * (index + 1)}'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const PaymentScreen(),
+                    builder: (context) => PaymentScreen(
+                      index: index + 1,
+                      price: harga * (index + 1),
+                    ),
                   ),
                 );
               },

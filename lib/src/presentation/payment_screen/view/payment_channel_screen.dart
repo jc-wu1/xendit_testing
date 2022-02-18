@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xendit_testing/src/presentation/injector.dart';
-import 'package:xendit_testing/src/presentation/payment_screen/bloc/payment_channel_bloc.dart';
+import 'package:xendit_testing/src/presentation/payment_screen/bloc/invoice_bloc.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+  final int index;
+  final double price;
+  const PaymentScreen({
+    Key? key,
+    required this.index,
+    required this.price,
+  }) : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -13,6 +19,22 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> body = {
+      "external_id": "invoice-${widget.index}",
+      "amount": widget.price,
+      "payer_email": "customer@domain.com",
+      "description": "Pembayaran Untuk Invoice Nomor #${widget.index}",
+      "items": [
+        {
+          "name": "Bayar Test",
+          "quantity": 1,
+          "price": widget.price,
+          "category": "Testing"
+        }
+      ],
+      "payment_methods": ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA"],
+      "locale": "id",
+    };
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -20,39 +42,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
         centerTitle: true,
       ),
-      body: BlocProvider<PaymentChannelBloc>(
-        create: (_) => injector()..add(PaymentChannelFetched()),
-        child: BlocBuilder<PaymentChannelBloc, PaymentChannelState>(
+      body: BlocProvider<InvoiceBloc>(
+        create: (_) => injector()..add(CreateInvoiceRequested(body)),
+        child: BlocBuilder<InvoiceBloc, InvoiceState>(
           builder: (context, state) {
-            if (state is PaymentChannelLoadInProgress) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is PaymentChannelLoadComplete) {
-              return ListView.builder(
-                itemCount: state.paymentChannels.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final paymentChannel = state.paymentChannels[index];
-                  return ListTile(
-                    title: Text(paymentChannel.name),
-                    subtitle: Text(paymentChannel.channel_category),
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const PaymentScreen(),
-                      //   ),
-                      // );
-                    },
-                    enabled: paymentChannel.channel_category == 'CREDIT_CARD'
-                        ? false
-                        : paymentChannel.channel_category == 'EWALLET'
-                            ? false
-                            : true,
-                  );
-                },
+            if (state is CreateInvoiceLoadInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            } else {
-              return const Center(child: Text("error"));
+            } else if (state is CreateInvoiceLoadComplete) {
+              return const Center(
+                child: Text('OK'),
+              );
+            } else if (state is CreateInvoiceLoadFailure) {
+              return const Center(
+                child: Text('Fail'),
+              );
             }
+            return const Center(
+              child: Text('state unknown'),
+            );
           },
         ),
       ),

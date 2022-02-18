@@ -23,7 +23,6 @@ class PaymentInvoiceEntity extends Equatable {
     required this.updated,
     required this.currency,
     required this.items,
-    required this.reminderDate,
   });
 
   final String id;
@@ -45,7 +44,6 @@ class PaymentInvoiceEntity extends Equatable {
   final String updated;
   final String currency;
   final List<Item> items;
-  final String reminderDate;
 
   @override
   List<Object> get props => [
@@ -68,7 +66,6 @@ class PaymentInvoiceEntity extends Equatable {
         updated,
         currency,
         items,
-        reminderDate,
       ];
 }
 
@@ -101,50 +98,29 @@ class AvailableBank extends Equatable {
     ];
   }
 
-  AvailableBank copyWith({
-    String? bankCode,
-    String? collectionType,
-    int? transferAmount,
-    String? bankBranch,
-    String? accountHolderName,
-    int? identityAmount,
-  }) {
-    return AvailableBank(
-      bankCode: bankCode ?? this.bankCode,
-      collectionType: collectionType ?? this.collectionType,
-      transferAmount: transferAmount ?? this.transferAmount,
-      bankBranch: bankBranch ?? this.bankBranch,
-      accountHolderName: accountHolderName ?? this.accountHolderName,
-      identityAmount: identityAmount ?? this.identityAmount,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
-      'bankCode': bankCode,
-      'collectionType': collectionType,
-      'transferAmount': transferAmount,
-      'bankBranch': bankBranch,
-      'accountHolderName': accountHolderName,
-      'identityAmount': identityAmount,
+      'bank_code': bankCode,
+      'collection_type': collectionType,
+      'transfer_amount': transferAmount,
+      'bank_branch': bankBranch,
+      'account_holder_name': accountHolderName,
+      'identity_amount': identityAmount,
     };
   }
 
-  factory AvailableBank.fromMap(Map<String, dynamic> map) {
+  factory AvailableBank.fromJson(Map<String, dynamic> map) {
     return AvailableBank(
-      bankCode: map['bankCode'] ?? '',
-      collectionType: map['collectionType'] ?? '',
-      transferAmount: map['transferAmount']?.toInt() ?? 0,
-      bankBranch: map['bankBranch'] ?? '',
-      accountHolderName: map['accountHolderName'] ?? '',
-      identityAmount: map['identityAmount']?.toInt() ?? 0,
+      bankCode: map['bank_code'] ?? '',
+      collectionType: map['collection_type'] ?? '',
+      transferAmount: map['transfer_amount']?.toInt() ?? 0,
+      bankBranch: map['bank_branch'] ?? '',
+      accountHolderName: map['account_holder_name'] ?? '',
+      identityAmount: map['identity_amount']?.toInt() ?? 0,
     );
   }
 
   String toJson() => json.encode(toMap());
-
-  factory AvailableBank.fromJson(String source) =>
-      AvailableBank.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -168,20 +144,6 @@ class Item extends Equatable {
   @override
   List<Object> get props => [name, quantity, price, category];
 
-  Item copyWith({
-    String? name,
-    int? quantity,
-    int? price,
-    String? category,
-  }) {
-    return Item(
-      name: name ?? this.name,
-      quantity: quantity ?? this.quantity,
-      price: price ?? this.price,
-      category: category ?? this.category,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -191,7 +153,7 @@ class Item extends Equatable {
     };
   }
 
-  factory Item.fromMap(Map<String, dynamic> map) {
+  factory Item.fromJson(Map<String, dynamic> map) {
     return Item(
       name: map['name'] ?? '',
       quantity: map['quantity']?.toInt() ?? 0,
@@ -201,8 +163,6 @@ class Item extends Equatable {
   }
 
   String toJson() => json.encode(toMap());
-
-  factory Item.fromJson(String source) => Item.fromMap(json.decode(source));
 
   @override
   String toString() {
