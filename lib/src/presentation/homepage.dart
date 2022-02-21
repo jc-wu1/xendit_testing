@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xendit_testing/src/presentation/payment_screen/view/payment_channel_screen.dart';
+import 'package:xendit_testing/src/presentation/invoice_screen/view/payment_channel_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PaymentScreen(
+                    builder: (context) => PaymentMethodScreen(
                       index: index + 1,
                       price: harga * (index + 1),
                     ),

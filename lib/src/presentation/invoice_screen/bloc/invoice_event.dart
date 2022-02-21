@@ -8,7 +8,8 @@ abstract class InvoiceEvent extends Equatable {
 }
 
 class CreateInvoiceRequested extends InvoiceEvent {
-  const CreateInvoiceRequested(this.params);
+  const CreateInvoiceRequested(this.params, this.qrCode);
 
   final Map<String, dynamic> params;
+  final Map<String, dynamic> qrCode;
 }

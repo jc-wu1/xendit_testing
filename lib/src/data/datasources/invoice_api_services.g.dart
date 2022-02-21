@@ -43,6 +43,58 @@ class _InvoiceApiServices implements InvoiceApiServices {
     return httpResponse;
   }
 
+  @override
+  Future<HttpResponse<QrPaymentModel>> createQrPayment(params) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization':
+          'Basic eG5kX2RldmVsb3BtZW50X3R5Z0FIR0xGejdSaVl1d2E2cWpES2cxanZ4UXlYSU0wbENPcVRxc2hmRkRFZ2E4enJycm1rS3JWQldoTm5yd3k6Og==',
+      r'Content-Type': 'application/json'
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(params);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<QrPaymentModel>>(Options(
+                method: 'POST',
+                headers: _headers,
+                extra: _extra,
+                contentType: 'application/json')
+            .compose(_dio.options, '/qr_codes',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = QrPaymentModel.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<VaAccountModel>> createVaPayment(params) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization':
+          'Basic eG5kX2RldmVsb3BtZW50X3R5Z0FIR0xGejdSaVl1d2E2cWpES2cxanZ4UXlYSU0wbENPcVRxc2hmRkRFZ2E4enJycm1rS3JWQldoTm5yd3k6Og==',
+      r'Content-Type': 'application/json'
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(params);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<VaAccountModel>>(Options(
+                method: 'POST',
+                headers: _headers,
+                extra: _extra,
+                contentType: 'application/json')
+            .compose(_dio.options, '/callback_virtual_accounts',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VaAccountModel.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

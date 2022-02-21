@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:xendit_testing/src/data/datasources/invoice_api_services.dart';
 import 'package:xendit_testing/src/domain/entities/payment_invoice_entity.dart';
 import 'package:xendit_testing/src/core/data_model.dart';
+import 'package:xendit_testing/src/domain/entities/qr_payment_entity.dart';
+import 'package:xendit_testing/src/domain/entities/va_account_entity.dart';
 import 'package:xendit_testing/src/domain/repositories/invoice_repository.dart';
 
 class InvoiceRepositoryImpl implements InvoiceRepository {
@@ -16,6 +18,52 @@ class InvoiceRepositoryImpl implements InvoiceRepository {
       Map<String, dynamic> param) async {
     try {
       final httpResponse = await invoiceApiServices.createInvoice(param);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(httpResponse.data);
+      } else {
+        return DataFailure(
+          DioError(
+            error: httpResponse.response.statusMessage,
+            requestOptions: httpResponse.response.requestOptions,
+            response: httpResponse.response,
+            type: DioErrorType.response,
+          ),
+        );
+      }
+    } on DioError catch (e) {
+      return DataFailure(e);
+    }
+  }
+
+  @override
+  Future<DataState<QrPaymentEntity>> createQrPayment(
+    Map<String, dynamic> param,
+  ) async {
+    try {
+      final httpResponse = await invoiceApiServices.createQrPayment(param);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(httpResponse.data);
+      } else {
+        return DataFailure(
+          DioError(
+            error: httpResponse.response.statusMessage,
+            requestOptions: httpResponse.response.requestOptions,
+            response: httpResponse.response,
+            type: DioErrorType.response,
+          ),
+        );
+      }
+    } on DioError catch (e) {
+      return DataFailure(e);
+    }
+  }
+
+  @override
+  Future<DataState<VaAccountEntity>> createVaPayment(
+    Map<String, dynamic> param,
+  ) async {
+    try {
+      final httpResponse = await invoiceApiServices.createVaPayment(param);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data);
       } else {

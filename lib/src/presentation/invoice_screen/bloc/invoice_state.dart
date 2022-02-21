@@ -13,6 +13,7 @@ class CreateInvoiceLoadInProgress extends InvoiceState {}
 
 class CreateInvoiceLoadComplete extends InvoiceState {
   final PaymentInvoiceEntity paymentInvoice;
+  // final QrPaymentEntity qrCode;
 
   const CreateInvoiceLoadComplete(this.paymentInvoice);
 
