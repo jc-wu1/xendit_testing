@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xendit_testing/src/presentation/injector.dart';
-import 'package:xendit_testing/src/presentation/invoice_screen/bloc/invoice_bloc.dart';
 import 'package:xendit_testing/src/presentation/payment_screen/bloc/payment_bloc.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -43,8 +42,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: BlocBuilder<PaymentBloc, PaymentState>(
           builder: (context, state) {
             if (state is CreateVaPaymentLoadComplete) {
-              return const Center(
-                child: Text('OK'),
+              var va = state.vaAccount;
+              return Column(
+                children: [
+                  Text('Account number: ${va.accountNumber}'),
+                  Text('BANK: ${va.bankCode}'),
+                  Text('Amount: ${va.expectedAmount}'),
+                  Text('Yg perlu dibayarkan: ${va.name}'),
+                ],
               );
             } else if (state is CreateVaPaymentLoadInProgress) {
               return const Center(

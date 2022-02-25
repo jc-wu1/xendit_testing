@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xendit_testing/src/presentation/injector.dart';
 import 'package:xendit_testing/src/presentation/invoice_screen/bloc/invoice_bloc.dart';
 import 'package:xendit_testing/src/presentation/payment_screen/payment_screen.dart';
@@ -38,12 +39,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       "locale": "id",
     };
 
-    Map<String, dynamic> qrCode = {
-      "external_id": "invoice-${widget.index}",
-      "type": "DYNAMIC",
-      "callback_url": "https://701b-140-213-0-172.ngrok.io",
-      "amount": widget.price
-    };
+    // Map<String, dynamic> qrCode = {
+    //   "external_id": "invoice-${widget.index}",
+    //   "type": "DYNAMIC",
+    //   "callback_url": "https://701b-140-213-0-172.ngrok.io",
+    //   "amount": widget.price
+    // };
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +54,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         centerTitle: true,
       ),
       body: BlocProvider<InvoiceBloc>(
-        create: (_) => injector()..add(CreateInvoiceRequested(body, qrCode)),
+        create: (_) => injector()..add(CreateInvoiceRequested(body)),
         child: BlocBuilder<InvoiceBloc, InvoiceState>(
           builder: (context, state) {
             if (state is CreateInvoiceLoadInProgress) {
@@ -63,6 +64,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             } else if (state is CreateInvoiceLoadComplete) {
               var paymentInvoice = state.paymentInvoice;
               // var qr = state.qrCode;
+              // return WebView(
+              //   initialUrl: paymentInvoice.invoiceUrl,
+              //   javascriptMode: JavascriptMode.unrestricted,
+              // );
               return Column(
                 children: [
                   Text(paymentInvoice.merchantName),

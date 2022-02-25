@@ -23,7 +23,7 @@ class _InvoiceApiServices implements InvoiceApiServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Authorization':
-          'Basic eG5kX2RldmVsb3BtZW50X3R5Z0FIR0xGejdSaVl1d2E2cWpES2cxanZ4UXlYSU0wbENPcVRxc2hmRkRFZ2E4enJycm1rS3JWQldoTm5yd3k6Og==',
+          'Basic eG5kX2RldmVsb3BtZW50X3VETEw3UU1PZmpzenJMQjhtWlNlVm14TXlkNTkwaFdCQ0l3Vmp3MjF0WEpBVHNKMFNRRE5aVTA4ZnAwaUhzOjo=',
       r'Content-Type': 'application/json'
     };
     _headers.removeWhere((k, v) => v == null);
@@ -49,7 +49,7 @@ class _InvoiceApiServices implements InvoiceApiServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Authorization':
-          'Basic eG5kX2RldmVsb3BtZW50X3R5Z0FIR0xGejdSaVl1d2E2cWpES2cxanZ4UXlYSU0wbENPcVRxc2hmRkRFZ2E4enJycm1rS3JWQldoTm5yd3k6Og==',
+          'Basic eG5kX2RldmVsb3BtZW50X3VETEw3UU1PZmpzenJMQjhtWlNlVm14TXlkNTkwaFdCQ0l3Vmp3MjF0WEpBVHNKMFNRRE5aVTA4ZnAwaUhzOjo=',
       r'Content-Type': 'application/json'
     };
     _headers.removeWhere((k, v) => v == null);
@@ -75,7 +75,7 @@ class _InvoiceApiServices implements InvoiceApiServices {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Authorization':
-          'Basic eG5kX2RldmVsb3BtZW50X3R5Z0FIR0xGejdSaVl1d2E2cWpES2cxanZ4UXlYSU0wbENPcVRxc2hmRkRFZ2E4enJycm1rS3JWQldoTm5yd3k6Og==',
+          'Basic eG5kX2RldmVsb3BtZW50X3VETEw3UU1PZmpzenJMQjhtWlNlVm14TXlkNTkwaFdCQ0l3Vmp3MjF0WEpBVHNKMFNRRE5aVTA4ZnAwaUhzOjo=',
       r'Content-Type': 'application/json'
     };
     _headers.removeWhere((k, v) => v == null);
