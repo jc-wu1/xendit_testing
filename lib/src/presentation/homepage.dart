@@ -27,15 +27,15 @@ class _MyHomePageState extends State<MyHomePage> {
               subtitle: Text('Harga Rp${harga * (index + 1)}'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentMethodScreen(
-                      index: index + 1,
-                      price: harga * (index + 1),
-                    ),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => PaymentMethodScreen(
+                //       index: index + 1,
+                //       price: harga * (index + 1),
+                //     ),
+                //   ),
+                // );
               },
             );
           },
