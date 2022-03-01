@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xendit_testing/src/presentation/invoice_screen/view/payment_channel_screen.dart';
+import 'package:xendit_testing/src/presentation/midtrans.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -27,15 +28,16 @@ class _MyHomePageState extends State<MyHomePage> {
               subtitle: Text('Harga Rp${harga * (index + 1)}'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => PaymentMethodScreen(
-                //       index: index + 1,
-                //       price: harga * (index + 1),
-                //     ),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // builder: (context) => PaymentMethodScreen(
+                    //   index: index + 1,
+                    //   price: harga * (index + 1),
+                    // ),
+                    builder: (context) => const MidtransPayment(),
+                  ),
+                );
               },
             );
           },

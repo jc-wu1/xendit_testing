@@ -49,12 +49,40 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
+//
+//    productFlavors {
+//        sandbox {
+//            buildConfigField "String", "BASE_URL", "\"https://customerapps-payment.herokuapp.com/index.php/\""
+//            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-Xgi4A3ESRekhjciT\""
+//        }
+//
+//        production {
+//            buildConfigField "String", "BASE_URL", "\"https://customerapps-payment.herokuapp.com/index.php/\""
+//            buildConfigField "String", "CLIENT_KEY", "\"Mid-client-SDX7ezFjxiHb2nwu\""
+//        }
+//    }
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+        }
+    }
+
+    flavorDimensions 'mode'
+    productFlavors {
+        sandbox {
+            dimension 'mode'
+            resValue "string", "app_name", "Xendit Sandbox"
+            buildConfigField "String", "BASE_URL", "\"https://customerapps-payment.herokuapp.com/index.php/\""
+            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-Xgi4A3ESRekhjciT\""
+        }
+        production {
+            dimension 'mode'
+            resValue "string", "app_name", "Xendit Production"
+            buildConfigField "String", "BASE_URL", "\"https://customerapps-payment.herokuapp.com/index.php/\""
+            buildConfigField "String", "CLIENT_KEY", "\"Mid-client-SDX7ezFjxiHb2nwu\""
         }
     }
 }
@@ -64,5 +92,10 @@ flutter {
 }
 
 dependencies {
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    // For loading and tinting drawables on older versions of the platform
+    implementation("androidx.appcompat:appcompat-resources:1.4.1")
+    sandboxImplementation "com.midtrans:corekit:1.31.0-SANDBOX"
+    productionImplementation 'com.midtrans:corekit:1.31.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

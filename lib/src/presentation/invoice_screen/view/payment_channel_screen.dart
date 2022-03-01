@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xendit_testing/src/presentation/injector.dart';
 import 'package:xendit_testing/src/presentation/invoice_screen/bloc/invoice_bloc.dart';
 import 'package:xendit_testing/src/presentation/payment_screen/payment_screen.dart';
